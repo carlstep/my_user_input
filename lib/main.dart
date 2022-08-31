@@ -53,6 +53,7 @@ class _BillInputState extends State<BillInput> {
       body: Column(
         children: [
           TextField(
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: ((value) {
               setState(() {
                 billAmount = double.parse(value);
