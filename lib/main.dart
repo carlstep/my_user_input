@@ -43,6 +43,7 @@ class _BillInputState extends State<BillInput> {
   }
 
   double billAmount = 0;
+  String billCurrency = 'USD';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class _BillInputState extends State<BillInput> {
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: ((value) {
               setState(() {
-                billAmount = double.parse(value);
+                determineCurrency(value);
               });
             }),
             controller: myController,
@@ -69,9 +70,26 @@ class _BillInputState extends State<BillInput> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           Text('this is my input - $billAmount'),
+          const SizedBox(
+            height: 20,
+          ),
+          Text('The bill currency is $billCurrency'),
         ],
       ),
     );
+  }
+
+  double determineCurrency(String value) {
+    billAmount = double.parse(value);
+    if (billAmount >= 1000) {
+      billCurrency = 'KHR';
+    } else {
+      billCurrency = 'USD';
+    }
+    throw '';
   }
 }
